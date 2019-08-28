@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var channelsAdapter: ArrayAdapter<Channel>
 
     private fun setUpAdapter() {
+        channelsAdapter.clear()
         channelsAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, MessageService.channels)
         channel_list_view.adapter = channelsAdapter
     }

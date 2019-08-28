@@ -39,7 +39,8 @@ object AuthService {
             }
         }
 
-        Volley.newRequestQueue(context).add(registerRequest)
+//        Volley.newRequestQueue(context).add(registerRequest)
+        App.sharedPreferences.requestQueue.add(registerRequest)
     }
 
     fun loginUser(context: Context, email: String, password: String, complete: (Boolean) -> Unit){
@@ -67,7 +68,8 @@ object AuthService {
             }
         }
 
-        Volley.newRequestQueue(context).add(loginRequest)
+        //Volley.newRequestQueue(context).add(loginRequest)
+        App.sharedPreferences.requestQueue.add(loginRequest)
     }
 
     fun createUser(context: Context, name: String, email: String, avatarName: String, avatarColor: String, complete: (Boolean) -> Unit){
@@ -110,7 +112,8 @@ object AuthService {
             }
         }
 
-        Volley.newRequestQueue(context).add(createRequest)
+        //Volley.newRequestQueue(context).add(createRequest)
+        App.sharedPreferences.requestQueue.add(createRequest)
     }
 
     fun findUserByEmail(context: Context, complete: (Boolean) -> Unit){
@@ -144,7 +147,8 @@ object AuthService {
             }
         }
 
-        Volley.newRequestQueue(context).add(findUserRequest)
+        //Volley.newRequestQueue(context).add(findUserRequest)
+        App.sharedPreferences.requestQueue.add(findUserRequest)
 
     }
 

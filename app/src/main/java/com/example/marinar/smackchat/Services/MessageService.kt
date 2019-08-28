@@ -48,6 +48,7 @@ object MessageService {
             }
         }
 
-        Volley.newRequestQueue(context).add(channelsRequest)
+        //Volley.newRequestQueue(context).add(channelsRequest)
+        App.sharedPreferences.requestQueue.add(channelsRequest)
     }
 }
