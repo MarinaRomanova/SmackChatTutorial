@@ -26,15 +26,16 @@ import io.socket.client.IO
 import io.socket.emitter.Emitter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 
 class MainActivity : AppCompatActivity() {
 
     val socket = IO.socket(SOCKET_URL)
     lateinit var channelsAdapter: ArrayAdapter<Channel>
+    var selectedChannel: Channel? = null
 
     private fun setUpAdapter() {
-        channelsAdapter.clear()
         channelsAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, MessageService.channels)
         channel_list_view.adapter = channelsAdapter
     }
@@ -53,6 +54,11 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
 
         setUpAdapter()
+        channel_list_view.setOnItemClickListener { _, _, i, _ ->
+            selectedChannel = MessageService.channels[i]
+            drawer_layout.closeDrawer(GravityCompat.START)
+            updateWithChannel()
+        }
 
         if(App.sharedPreferences.isLoggedIn){
             AuthService.findUserByEmail(this){}
@@ -70,11 +76,21 @@ class MainActivity : AppCompatActivity() {
                 login_btn.text = getString(R.string.logout)
                 MessageService.getChannels(context){ complete ->
                     if (complete) {
-                        channelsAdapter.notifyDataSetChanged()
+                        if(MessageService.channels.count() > 0){
+                            selectedChannel = MessageService.channels[0]
+                            channelsAdapter.notifyDataSetChanged()
+                            updateWithChannel()
+                        }
                     }
                 }
             }
         }
+    }
+
+    fun updateWithChannel(){
+        mainChannelName_tv.text = "#${selectedChannel?.name}"
+        //TO DO: download messages for channel
+
     }
 
     override fun onResume() {
