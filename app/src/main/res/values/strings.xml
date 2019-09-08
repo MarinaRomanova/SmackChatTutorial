@@ -40,4 +40,7 @@
     <string name="socket_add_channel_flag">newChannel</string>
     <string name="socket_channel_created_event_flag">channelCreated</string>
     <string name="description_json">description</string>
+    <string name="socket_message_created_flag">messageCreated</string>
+    <string name="user_image_icon">user image icon</string>
+    <string name="parse_date_error_message">Cannot parse date</string>
 </resources>
